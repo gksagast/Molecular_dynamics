@@ -49,3 +49,107 @@ Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 30, Name: C
       Automatically increasing to 10000.
 
 ---------------------------------------------------------------------------------------------------
+maria@gcs-hpc:~/Amber/150$ tleap
+-I: Adding /opt/amber/amber22/dat/leap/prep to search path.
+-I: Adding /opt/amber/amber22/dat/leap/lib to search path.
+-I: Adding /opt/amber/amber22/dat/leap/parm to search path.
+-I: Adding /opt/amber/amber22/dat/leap/cmd to search path.
+
+Welcome to LEaP!
+(no leaprc in search path)
+> source leaprc.protein.ff19SB
+----- Source: /opt/amber/amber22/dat/leap/cmd/leaprc.protein.ff19SB
+----- Source of /opt/amber/amber22/dat/leap/cmd/leaprc.protein.ff19SB done
+Log file: ./leap.log
+Loading parameters: /opt/amber/amber22/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+Loading parameters: /opt/amber/amber22/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+Loading library: /opt/amber/amber22/dat/leap/lib/amino19.lib
+Loading library: /opt/amber/amber22/dat/leap/lib/aminoct12.lib
+Loading library: /opt/amber/amber22/dat/leap/lib/aminont12.lib
+> source leaprc.gaff
+----- Source: /opt/amber/amber22/dat/leap/cmd/leaprc.gaff
+----- Source of /opt/amber/amber22/dat/leap/cmd/leaprc.gaff done
+Log file: ./leap.log
+Loading parameters: /opt/amber/amber22/dat/leap/parm/gaff.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 1.81, May 2017)
+> source leaprc.water.opc
+----- Source: /opt/amber/amber22/dat/leap/cmd/leaprc.water.opc
+----- Source of /opt/amber/amber22/dat/leap/cmd/leaprc.water.opc done
+Loading library: /opt/amber/amber22/dat/leap/lib/atomic_ions.lib
+Loading library: /opt/amber/amber22/dat/leap/lib/solvents.lib
+Loading parameters: /opt/amber/amber22/dat/leap/parm/frcmod.opc
+Reading force field modification type file (frcmod)
+Reading title:
+Parameters for OPC water (JPCL, 2014, 5 (21), pp 3863-3871)
+Loading parameters: /opt/amber/amber22/dat/leap/parm/frcmod.ionslm_126_opc
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of atomic ions for the OPC water model (12-6 set)
+> prot = loadpdb pro.pdb
+Loading PDB file: ./pro.pdb
+Created a new atom named: HD1 within residue: .R<HIE 129>
+Created a new atom named: HD1 within residue: .R<HIE 130>
+Created a new atom named: HE2 within residue: .R<GLU 146>
+  total atoms in file: 2942
+  Leap added 2 missing atoms according to residue templates:
+       2 H / lone pairs
+  The file contained 3 atoms not in residue templates
+> fmod = loadamberparams ligand.frcmod
+Loading parameters: ./ligand.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+> lig = loadmol2 ligand.mol2
+Loading Mol2 file: ./ligand.mol2
+Reading MOLECULE named UNL
+> complex = combine {prot lig}
+> savepdb complex complex_dry.pdb
+Writing pdb file: complex_dry.pdb
+
+Warning:  Converting N-terminal residue name to PDB format: NGLY -> GLY
+
+Warning:  Converting C-terminal residue name to PDB format: CARG -> ARG
+> solvatebox complex OPCPBOX 15
+
+Error: solvateBox: Argument #2 is of type String must be of type: [unit]
+    Here are some suggestions for correcting this error:
+    Verify the type of an argument with the desc command.
+    Check for alternate argument names with the list command.
+usage:  solvateBox <solute> <solvent> <buffer> [iso] [closeness]
+> addions complex Na+ 0
+
+Warning: addIons: 1st Ion & target unit have charges of the same sign:
+     unit charge = 6.002; ion1 charge = 1;
+     can't neutralize.
+> addions complex Cl- 0
+6 Cl- ions required to neutralize.
+Adding 6 counter ions to "complex" using 1A grid
+Used default radius  1.50 for 3 atoms
+Grid extends from solute vdw + 4.51  to  10.50
+Resolution:      1.00 Angstrom.
+ (no solvent present)
+Calculating grid charges
+Placed Cl- in complex at (32.21, 11.27, 1.17).
+Placed Cl- in complex at (13.21, 7.27, -16.83).
+Placed Cl- in complex at (-11.79, -14.73, 10.17).
+Placed Cl- in complex at (25.21, -5.73, 12.17).
+Placed Cl- in complex at (28.21, 11.27, -9.83).
+Placed Cl- in complex at (2.21, -18.73, -0.83).
+
+Done adding ions.
+> saveamberparm complex complex.prmtop complex.rst7
+Checking Unit.
+FATAL:  Atom .R<GLU 146>.A<HE2 16> does not have a type.
+FATAL:  Atom .R<HIE 130>.A<HD1 18> does not have a type.
+FATAL:  Atom .R<HIE 129>.A<HD1 18> does not have a type.
+
+Error: Failed to generate parameters
+
+Warning: Parameter file was not saved.
+>               
