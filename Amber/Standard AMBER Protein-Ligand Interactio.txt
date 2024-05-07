@@ -1,5 +1,5 @@
 Standard AMBER Protein-Ligand Interaction:
-test
+
 0. Linux Environment Settings:
 
 export AMBERHOME=/path/to/amber
@@ -10,7 +10,7 @@ source amber.sh
     
     Protein:
         Prep Protein PDB for AMBER use:
-        export AMBERHOME=/path/to/amber
+        export AMBERHOME=/opt/amber/amber22
         export PATH=$PATH:$AMBERHOME/bin
         source amber.sh
         
@@ -21,6 +21,7 @@ source amber.sh
         [pro.pdb is output file]
         [dry removes water]
         [reduce adds hydrogen molecules]
+
 
     Ligand:
         
@@ -35,9 +36,9 @@ source amber.sh
 1) source leaprc.protein.ff14SB
 2) source leaprc.gaff
 3) source leaprc.water.tip3p
-4) prot = loadpdb rec.noH.pdb
-5) fmod = loadamberparams frcmod_lig
-6) lig = loadmol2 TIZ.bcc.mol2
+4) prot = loadpdb pro.pdb
+5) fmod = loadamberparams ligand.frcmod
+6) lig = loadmol2 ligand.mol2
 7) complex = combine {prot lig}
 8) savepdb complex complex_dry.pdb
 9) solvatebox complex TIP3PBOX 15

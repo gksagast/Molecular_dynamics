@@ -1,0 +1,51 @@
+maria@gcs-hpc:~/Amber/150$ antechamber -i run_1.pdb -fi pdb -o ligand.mol2 -fo mol2 -pf y -nc 0 -c bcc
+
+Welcome to antechamber 22.0: molecular input file processor.
+
+Info: acdoctor mode is on: check and diagnose problems in the input file.
+Info: The atom type is set to gaff; the options available to the -at flag are
+      gaff, gaff2, amber, bcc, and sybyl.
+
+-- Check Format for pdb File --
+   Status: pass
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+   Status: pass
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+   Status: pass
+-- Check Number of Units --
+   Status: pass
+acdoctor mode has completed checking the input file.
+
+Warning: The assigned bond types may be wrong, please :
+(1) double check the structure (the connectivity) and/or 
+(2) adjust atom valence penalty parameters in APS.DAT, and/or 
+(3) increase PSCUTOFF in define.h and recompile bondtype.c
+    (be cautious, using a large value of PSCUTOFF (>100) will 
+    significantly increase the computation time).
+Info: Total number of electrons: 182; net charge: 0
+
+Running: /opt/amber/amber22/bin/sqm -O -i sqm.in -o sqm.out
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 11, Name: C7).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 13, Name: C9).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 16, Name: C12).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 26, Name: C20).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 27, Name: C21).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 28, Name: C22).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 29, Name: C23).
+      Automatically increasing to 10000.
+Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 30, Name: C24).
+      Automatically increasing to 10000.
+
+---------------------------------------------------------------------------------------------------
