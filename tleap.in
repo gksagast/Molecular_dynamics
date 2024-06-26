@@ -1,0 +1,17 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+source leaprc.water.opc
+
+prot = loadpdb AF_PTB_ren_prep.pdb
+fmod = loadamberparams ligand.frcmod
+lig = loadmol2 ligand.mol2
+
+complex = combine {prot lig}
+savepdb complex complex_dry.pdb
+
+solvatebox complex OPCBOX 15
+addions complex Na+ 0
+addions complex Cl- 0
+
+saveamberparm complex complex.prmtop complex.inpcrd
+quit
